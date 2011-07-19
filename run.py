@@ -14,7 +14,7 @@ imgs = glob.glob(OUTPUT_SIMPLE+"*.png")
 
 #imgs = ["image_set/output/101085.png",]
 
-Writer = csv.writer(open('results.csv', 'w'), delimiter=' ',quotechar='|',
+Writer = csv.writer(open('results/results.csv', 'w'), delimiter=' ',quotechar='|',
                     quoting=csv.QUOTE_MINIMAL)
 
 def run(img):
