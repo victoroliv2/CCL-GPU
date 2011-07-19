@@ -10,9 +10,9 @@ import csv
 
 OUTPUT_SIMPLE = "image_set/output/"
 
-#imgs = glob.glob(OUTPUT_SIMPLE+"*.png")
+imgs = glob.glob(OUTPUT_SIMPLE+"*.png")
 
-imgs = ["image_set/output/101085.png",]
+#imgs = ["image_set/output/101085.png",]
 
 Writer = csv.writer(open('results/results.csv', 'w'), delimiter=' ',quotechar='|',
                     quoting=csv.QUOTE_MINIMAL)
