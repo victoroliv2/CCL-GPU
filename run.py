@@ -25,7 +25,7 @@ def run(img):
          "lequiv_total" : 0,
         }
 
-    p = subprocess.Popen(["./test", "%s.pgm"%img], stdout=subprocess.PIPE)
+    p = subprocess.Popen(["./bin/ccl_test", "%s.pgm"%img], stdout=subprocess.PIPE)
     lines = p.stdout.readlines()
 
     for l in lines:

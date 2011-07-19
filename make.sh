@@ -1,2 +1,2 @@
-nvcc -DTHREADED -arch sm_12 test.cu -o test
-nvcc -Xptxas -v -arch sm_13 --maxrregcount=20 distance_transform2.cu -o distance_transform2
+nvcc -DTHREADED -arch sm_12 ccl_test.cu -o bin/ccl_test
+nvcc -Xptxas -v -arch sm_13 --maxrregcount=20 distance_transform2.cu -o bin/distance_transform2
