@@ -8,7 +8,7 @@ import os
 
 import csv
 
-OUTPUT_SIMPLE = "image_set/output_simple/"
+OUTPUT_SIMPLE = "image_set/output/"
 
 imgs = glob.glob(OUTPUT_SIMPLE+"*.png")
 
@@ -20,9 +20,10 @@ Writer = csv.writer(open('results/results.csv', 'w'), delimiter=' ',quotechar='|
 def run(img):
 
     d = {"cc" : 0,
-         "gold" : 0, 
-         "uf_total" : 0,
-         "lequiv_total" : 0,
+         "gold" : 0,
+         "uf" : 0,
+         "uf_hybrid" : 0,
+         "lequiv" : 0,
         }
 
     p = subprocess.Popen(["./bin/ccl_test", "%s.pgm"%img], stdout=subprocess.PIPE)
@@ -34,17 +35,22 @@ def run(img):
 
     numbercc = int(d["cc"])
     gold_serial = float(d["gold"])
-    uf_gpu = float(d["uf_total"].split()[0])
-    lequiv_gpu = float(d["lequiv_total"].split()[0])
+    uf_gpu = float(d["uf"].split()[0])
+    uf_hybrid = float(d["uf_hybrid"].split()[0])
+    lequiv_gpu = float(d["lequiv"].split()[0])
 
-    return [numbercc, gold_serial, uf_gpu, lequiv_gpu]
+    return [numbercc, gold_serial, uf_gpu, uf_hybrid, lequiv_gpu]
+
+l_uf = []
+l_uf_hybrid = []
+l_lequiv = []
+l_stephano = []
 
 for n,i in enumerate(imgs):
-    
+
     RESULTS = []
 
     f = os.path.split(OUTPUT_SIMPLE+i)[1].split(".")[0]
-    print OUTPUT_SIMPLE+f
     res = run(OUTPUT_SIMPLE+f)
 
     k = (mmreadgray(OUTPUT_SIMPLE+f+".png") > 0)
@@ -58,8 +64,20 @@ for n,i in enumerate(imgs):
 
     RESULTS = res+[min(v1)]
 
-    print RESULTS
+    l_uf.append(RESULTS[2])
+    l_uf_hybrid.append(RESULTS[3])
+    l_lequiv.append(RESULTS[4])
+    l_stephano.append(RESULTS[5])
+
+    print(f)
+    print("\tcc:\t%d\n\tgold:\t%f\n\tuf:\t%f\n\tuf_hybrid:\t%f\n\tlequiv:\t%f\n\tstephano:\t%f\n" % tuple(RESULTS) )
     Writer.writerow(RESULTS)
+
+print(" == Finals Results == \n")
+print("union-find (gpu)\n\t%4.2f\n\t%4.2f\n\t%4.2f\n\t%4.2f"     % (numpy.mean(l_uf), numpy.std(l_uf), numpy.max(l_uf), numpy.min(l_uf)) )
+print("union-find (gpu+cpu)\n\t%4.2f\n\t%4.2f\n\t%4.2f\n\t%4.2f" % (numpy.mean(l_uf_hybrid), numpy.std(l_uf_hybrid), numpy.max(l_uf_hybrid), numpy.min(l_uf_hybrid)) )
+print("Label Equivalence\n\t%4.2f\n\t%4.2f\n\t%4.2f\n\t%4.2f"    % (numpy.mean(l_lequiv), numpy.std(l_lequiv), numpy.max(l_lequiv), numpy.min(l_lequiv)) )
+print("Stephano\n\t%4.2f\n\t%4.2f\n\t%4.2f\n\t%4.2f"             % (numpy.mean(l_stephano), numpy.std(l_stephano), numpy.max(l_stephano), numpy.min(l_stephano)) )
 
 import sys
 sys.exit(0)

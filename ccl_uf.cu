@@ -301,6 +301,8 @@ void CCL(unsigned char* img, int w, int h, int* label, bool use_cpu=false) {
         return;
     }
 
+    cudaThreadSetCacheConfig(cudaFuncCachePreferShared);
+
     UF_local <<<grid, block>>>
         (d_label, w, h);
 
@@ -314,6 +316,8 @@ void CCL(unsigned char* img, int w, int h, int* label, bool use_cpu=false) {
     }
     else
     {
+        cudaThreadSetCacheConfig(cudaFuncCachePreferL1);
+
         UF_global <<<grid, block>>>
             (d_label, w, h);
 

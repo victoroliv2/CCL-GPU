@@ -25,9 +25,9 @@ for n,i in enumerate(imgs):
     img = mmareaopen(img, 20)
     pil_img = Image.fromarray(img, "L")
     pil_img = pil_img.resize(newsize)
-    pil_img.save( "output_simple/"+f+".png" )
+    pil_img.save( "output/"+f+".png" )
     os.system("convert -compress none %s %s" % 
-              ("output_simple/"+f+".png", "output_simple/"+f+".pgm"))
+              ("output/"+f+".png", "output/"+f+".pgm"))
 
 import sys
 sys.exit(0)

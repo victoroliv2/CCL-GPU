@@ -61,8 +61,7 @@ int main(int argc, char* argv[]) {
     cudaEventCreate( &stop );
     float et;
 
-        //printf("======================================\n");
-        //printf("%s\n", argv[1]);
+      {
         img = load_ppm(argv[1], &w, &h);
         label_gold = (int*)malloc(w*h*sizeof(int));
         label = (int*)malloc(w*h*sizeof(int));
@@ -85,7 +84,7 @@ int main(int argc, char* argv[]) {
         }
         et = MIN_ET();
         
-        printf("uf_gpu_total: %.3f\n", et);        
+        printf("uf: %.3f\n", et);        
 
         VERIFY();
 
@@ -97,7 +96,7 @@ int main(int argc, char* argv[]) {
         }
         et = MIN_ET();
         
-        printf("uf_cpu+gpu_total: %.3f\n", et);        
+        printf("uf_hybrid: %.3f\n", et);        
 
         VERIFY();
 
@@ -109,7 +108,7 @@ int main(int argc, char* argv[]) {
         }
         et = MIN_ET();
 
-        printf("lequiv_total: %.3f\n", et);        
+        printf("lequiv: %.3f\n", et);        
 
         VERIFY();
 
@@ -124,6 +123,8 @@ int main(int argc, char* argv[]) {
         printf("%.3f %.3f\n", et, et_gold/et);        
 
         VERIFY();*/
+
+      }
 
         free(img);
         free(label);
