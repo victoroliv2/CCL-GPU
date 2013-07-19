@@ -77,6 +77,14 @@ print(" == Finals Results == \n")
 s1 = l_stephano/l_uf
 s2 = l_stephano/l_uf_hybrid
 s3 = l_stephano/l_lequiv
+
+print("[EXECUTION TIME]")
+print("union-find (gpu)\n\tmean:%4.2f\n\tstd:%4.2f\n\tmax:%4.2f\n\tmin:%4.2f"     % (numpy.mean(l_uf),        numpy.std(l_uf),        numpy.max(l_uf),        numpy.min(l_uf)) )
+print("union-find (gpu+cpu)\n\tmean:%4.2f\n\tstd:%4.2f\n\tmax:%4.2f\n\tmin:%4.2f" % (numpy.mean(l_uf_hybrid), numpy.std(l_uf_hybrid), numpy.max(l_uf_hybrid), numpy.min(l_uf_hybrid)) )
+print("Label Equivalence\n\tmean:%4.2f\n\tstd:%4.2f\n\tmax:%4.2f\n\tmin:%4.2f"    % (numpy.mean(l_lequiv),    numpy.std(l_lequiv),    numpy.max(l_lequiv),    numpy.min(l_lequiv)) )
+print("Stephano\n\tmean:%4.2f\n\tstd:%4.2f\n\tmax:%4.2f\n\tmin:%4.2f"             % (numpy.mean(l_stephano),  numpy.std(l_stephano),  numpy.max(l_stephano),  numpy.min(l_stephano)) )
+
+print("[SPEEDUP]")
 print("union-find (gpu)\n\tmean:%4.2f\n\tstd:%4.2f\n\tmax:%4.2f\n\tmin:%4.2f"     % (numpy.mean(s1), numpy.std(s1), numpy.max(s1), numpy.min(s1)) )
 print("union-find (gpu+cpu)\n\tmean:%4.2f\n\tstd:%4.2f\n\tmax:%4.2f\n\tmin:%4.2f" % (numpy.mean(s2), numpy.std(s2), numpy.max(s2), numpy.min(s2)) )
 print("Label Equivalence\n\tmean:%4.2f\n\tstd:%4.2f\n\tmax:%4.2f\n\tmin:%4.2f"    % (numpy.mean(s3), numpy.std(s3), numpy.max(s3), numpy.min(s3)) )
