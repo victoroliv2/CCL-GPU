@@ -1,4 +1,10 @@
-More Information at:
+ccl_uf.cu -> new algorithm described in the paper 
+ccl_naive_prop.cu -> naive label propagation
+ccl_lequiv.cu -> label equivalence
+ccl_gold.cu -> ground truth for verification
+ccl_test.cu -> runs all 3 on the gpu (main function)
+generate_dataset.py -> download dataset used in the paper
+run.py -> runs ccl_test on the downloaded dataset
+spiral.py -> utilitity to create images with spirals
 
-http://parati.dca.fee.unicamp.br/adesso/wiki/ia870/ialabel_gpu/view/
-http://parati.dca.fee.unicamp.br/adesso/wiki/ia870/ialabel_gpu_desc/view/
+I don’t have the sources for the CPU CCL implementation used in the paper because it is proprietary (it used SSE2, threads and hand-optimized assembly code).
