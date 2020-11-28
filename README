@@ -1,3 +1,7 @@
+Algorithms implemented for "A Study on Connected Components Labeling algorithms using GPUs", published on:
+
+Oliveira, V.M., Lotufo, R.A.: A study on connected components labeling algorithmsusing GPUs. In: SIBGRAPI. vol. 3, p. 4 (2010)
+
 ccl_uf.cu -> new algorithm described in the paper 
 ccl_naive_prop.cu -> naive label propagation
 ccl_lequiv.cu -> label equivalence
